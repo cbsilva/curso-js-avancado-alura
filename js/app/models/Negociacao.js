@@ -10,6 +10,8 @@ class Negociacao {
         this._data = data;
         this._quantidade = quantidade;
         this._valor = valor;
+
+        Object.freeze(this);
     }
 
     /**
