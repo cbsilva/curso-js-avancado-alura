@@ -18,9 +18,7 @@ class NegociacaoController {
          * tratando a data com spread operator
          */
         let data = new Date(...this._inputData.value.split('-')
-                                   .map(function(item, indice){
-                                       return item - indice % 2;
-                                   })
+                                   .map((item, indice) => item - indice % 2)
         );
     
         let negociacao = new Negociacao(
