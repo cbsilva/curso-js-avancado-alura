@@ -6,7 +6,7 @@ class NegociacaoController {
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
 
-        Object.freeze(this);
+        //Object.freeze(this);
     }
 
 
@@ -29,10 +29,10 @@ class NegociacaoController {
 
         console.log(negociacao);
 
-        this.limparCampos();
+        this.limpaCampos();
     }
 
-    limparCampos() {
+    limpaCampos() {
 
         let $ = document.querySelector.bind(document);
 
@@ -47,10 +47,5 @@ class NegociacaoController {
         campos[2].value = 0;
     
         campos[0].focus();
-
-
-    }
-
-
-    
+    }    
 }
