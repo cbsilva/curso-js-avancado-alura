@@ -13,3 +13,4 @@ console.warn('Teste');
 console.info("answer time");
 console.error("Click to continue");
 console.groupEnd();
+

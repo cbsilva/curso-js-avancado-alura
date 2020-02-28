@@ -1,0 +1,22 @@
+<script>
+    function somaDoisNumeros(numero1, numero2) 
+    {
+        console.group('recebimento de parametros');
+        console.warn(numero1);
+        console.warn(numero2);
+        console.groupEnd();
+        
+        return numero1 + numero2;
+        
+    }
+
+    console.log(somaDoisNumeros(10,20));
+
+    let numeros = [15, 30];
+    /**
+     * chamando a funcao utilizando spread operator 
+     */
+    console.log(somaDoisNumeros(...numeros));
+
+
+</script>

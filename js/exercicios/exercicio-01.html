@@ -1,0 +1,22 @@
+<script>
+    let numeros = [3,2,11,20,8,7];
+    let numImpar = numeros.map(function(item) {
+        let impar = item % 2;
+        if (impar != 0)
+        {
+            return item * 2;
+        } else {
+            return item;
+        }
+
+    });
+    
+   
+    //forma menos verbosa de se fazer
+    let numImpar2 = numeros.map(item => item % 2 ? item * 2 : item);
+
+    console.log(numeros);
+    console.log(numImpar);
+    console.log(numImpar2);
+
+</script>
