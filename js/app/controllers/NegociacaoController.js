@@ -17,25 +17,18 @@ class NegociacaoController {
         /**
          * tratando a data com spread operator
          */
-        let data = new Date(...this._inputData.value.split('-')
-                                   .map((item, indice) => item - indice % 2)
-        );
+        let dateHelper = new DateHelper();
+        
     
         let negociacao = new Negociacao(
-            data,
+            dateHelper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
             this._inputValor.value
         );
 
         console.log(negociacao);
 
-        console.log(negociacao.data);
-
-        let diaMesAno = negociacao.data.getDate() + '/' 
-                      + (negociacao.data.getMonth() + 1) + '/' 
-                      + negociacao.data.getFullYear();
-
-        console.log(diaMesAno);
+        console.log(dateHelper.dataParaTexto(negociacao.data));
 
     
                         
