@@ -9,7 +9,7 @@ class View {
     }
 
     template(){
-        throw new Error('Esta classe precisa ser implementada');
+        throw new Error('O método template deve ser implementado');
     }
 
     /**
