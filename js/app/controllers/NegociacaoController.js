@@ -25,23 +25,15 @@ class NegociacaoController {
 
         console.log(DateHelper.dataParaTexto(negociacao.data)); 
                         
-        this.limpaCampos();
+        this._limpaFormulario();
     }
 
-    limpaCampos() {
+    _limpaFormulario() {
+        this._inputData.value       = '';
+        this._inputQuantidade.value = 1;
+        this._inputValor.value      = 0.0;
 
-        let $ = document.querySelector.bind(document);
-
-        let campos = [
-            $('#data'),
-            $('#quantidade'),
-            $('#valor')
-        ];
-
-        campos[0].value = '';
-        campos[1].value = 1;
-        campos[2].value = 0;
-    
-        campos[0].focus();
+        this._inputData.focus();
+        
     }    
 }
