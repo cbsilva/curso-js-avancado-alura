@@ -5,47 +5,51 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
+        this._listaNegociacoes  = new ListaNegociacoes();
 
         //Object.freeze(this);
     }
 
+    /**
+     * 
+     * @param {*} event
+     * Método adiciona negociacoes 
+     */
 
     adiciona(event) {        
 
-        event.preventDefault();
+        event.preventDefault();     
 
-        /**
-         * tratando a data com spread operator
-         */
-        let data = new Date(...this._inputData.value.split('-')
-                                   .map((item, indice) => item - indice % 2)
-        );
-    
-        let negociacao = new Negociacao(
-            data,
-            this._inputQuantidade.value,
-            this._inputValor.value
-        );
+        this._listaNegociacoes.adiciona(this._criaNegociacao());
+        this._listaNegociacoes.negociacoes.push(this._criaNegociacao());
+        this._limpaFormulario();
 
-        console.log(negociacao);
-
-        this.limpaCampos();
+        console.log(this._listaNegociacoes.negociacoes);
+                           
     }
 
-    limpaCampos() {
+    /**
+     * Método privado para criar negociacao
+     */
+    _criaNegociacao() {
 
-        let $ = document.querySelector.bind(document);
+        return new Negociacao(
+               DateHelper.textoParaData(this._inputData.value),
+               this._inputQuantidade.value,
+               this._inputValor.value
+        );
+    }
 
-        let campos = [
-            $('#data'),
-            $('#quantidade'),
-            $('#valor')
-        ];
+    /**
+     * Método privado para limpar formulário
+     */
 
-        campos[0].value = '';
-        campos[1].value = 1;
-        campos[2].value = 0;
-    
-        campos[0].focus();
+    _limpaFormulario() {
+
+        this._inputData.value       = '';
+        this._inputQuantidade.value = 1;
+        this._inputValor.value      = 0.0;
+
+        this._inputData.focus();       
     }    
 }
