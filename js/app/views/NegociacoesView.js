@@ -1,10 +1,11 @@
-class NegociacoesView {
+class NegociacoesView extends View{
+
+    constructor(elemento) {
+        super(elemento);        
+    }
 
     
-    constructor(elemento) {
-        
-        this._elemento = elemento;
-    } 
+    
 
      /**
       * Metodo template tabela negociacoes
@@ -40,19 +41,5 @@ class NegociacoesView {
                 </td>
             </tfoot>
         </table>`;
-    }
-
-    /**
-     * Metodo atualiza tabela de negociacoes
-     * @param {lista} model 
-     */
-
-    update(model) {
-
-        return this._elemento.innerHTML = this._template(model);
-
-    }
-
-
-    
+    }    
 }
