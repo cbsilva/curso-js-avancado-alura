@@ -8,12 +8,16 @@ class View {
         this._elemento = elemento;
     }
 
+    template(){
+        throw new Error('Esta classe precisa ser implementada');
+    }
+
     /**
      * Metodo generico update template
      * @param {lista} model 
      */
     update(model) {
 
-        return this._elemento.innerHTML = this._template(model);
+        return this._elemento.innerHTML = this.template(model);
     }
 }

@@ -2,9 +2,7 @@ class NegociacoesView extends View{
 
     constructor(elemento) {
         super(elemento);        
-    }
-
-    
+    }   
     
 
      /**
@@ -12,7 +10,7 @@ class NegociacoesView extends View{
       * @param {lista} model 
       */
 
-    _template(model) {
+    template(model) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
