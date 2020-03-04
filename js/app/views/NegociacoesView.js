@@ -1,17 +1,16 @@
-class NegociacoesView {
+class NegociacoesView extends View{
 
-    
     constructor(elemento) {
-        
-        this._elemento = elemento;
-    } 
+        super(elemento);        
+    }   
+    
 
      /**
       * Metodo template tabela negociacoes
       * @param {lista} model 
       */
 
-    _template(model) {
+    template(model) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -40,19 +39,5 @@ class NegociacoesView {
                 </td>
             </tfoot>
         </table>`;
-    }
-
-    /**
-     * Metodo atualiza tabela de negociacoes
-     * @param {lista} model 
-     */
-
-    update(model) {
-
-        return this._elemento.innerHTML = this._template(model);
-
-    }
-
-
-    
+    }    
 }
