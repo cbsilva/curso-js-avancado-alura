@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 class ListaNegociacoes {
 
-    constructor(armadilha) {
+    constructor(contexto,armadilha) {
 
         this._negociacoes = [];
         this._armadilha = armadilha;
+        this._contexto = contexto;
     }
 
     /**
@@ -15,23 +16,26 @@ class ListaNegociacoes {
     adiciona(negociacao){
 
         this._negociacoes.push(negociacao);
-        this._armadilha(this);
-    }
+        //this._armadilha(this);
+        Reflect.apply(this._armadilha, this._contexto, [this]);
 
-    esvazia(){
-        this._negociacoes = [];
-        this._armadilha(this);
     }
-
+    
     /**
      * Metodos retorna lista de negociacoes
      */
     get negociacoes(){
-
+        
         /* incluido array vazio antes do concat, para
-         * blindar o metodo e não deixar o usuário incluir 
-         * sujeira
-         */
-        return [].concat(this._negociacoes);
+        * blindar o metodo e não deixar o usuário incluir 
+        * sujeira
+        */
+       return [].concat(this._negociacoes);
+    }
+
+    esvazia(){
+        this._negociacoes = [];
+        //this._armadilha(this);
+        Reflect.apply(this._armadilha, this._contexto, [this]);
     }
 }
