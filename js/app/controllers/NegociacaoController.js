@@ -45,6 +45,41 @@ class NegociacaoController {
         
     }
 
+    importacoNegociacoes(){
+        let xhr = new XMLHttpRequest ();
+
+        /* Configuracoes
+        caso a url fosse externa era preciso informar
+        o caminho completo e não apenas negociacoes/semana
+         */
+        xhr.open('GET', 'negociacoes/semana');
+
+        /* 
+        Estados esperados durante uma requisicao AJAX
+            0: requisição ainda não iniciada
+            1: conexão com o servidor estabelecida
+            2: requisição recebida
+            3: processando requisição
+            4: requisição está concluída e a resposta está pronta
+        */
+
+        xhr.onreadystatechange = () => {
+
+            if (xhr.readyState == 4){
+
+                if (xhr.status == 200) {
+                    console.log('Obtendo as negociações do servidor.');
+                } else {
+                    console.log('Não foi possivel obter as negociações do servidor.');
+                }
+            }
+
+        }
+
+        /*executa */
+        xhr.send();
+    }
+
     /**
      * Método privado para criar negociacao
      */
