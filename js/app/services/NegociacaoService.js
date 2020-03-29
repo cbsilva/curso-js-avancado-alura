@@ -1,5 +1,21 @@
 class NegociacaoService{
     obterNegociacaoDaSemana(callback){
+
+        /**
+         * A convenção é que cada callback receba sempre o erro no primeiro parâmetro. 
+         * Na função callback, basta então verificar esse parâmetro para saber se ocorreu um erro ou não!
+         * --------------------------------------
+         * Exemplo:
+        * fs = require('fs');
+          fs.readFile('./arquivo.txt', function(erro, dados) {
+            if(erro) {
+                console.log('Um erro ocorreu');
+                return;
+            }
+            console.log(dados);
+          });
+         */
+
         let xhr = new XMLHttpRequest ();
 
         /* Configuracoes
