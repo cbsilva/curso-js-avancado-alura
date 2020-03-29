@@ -49,6 +49,18 @@ class NegociacaoController {
         
         let service = new NegociacaoService();
 
+        Promise
+        .all([
+            service.obterNegociacaoDaSemana(),
+            service.obterNegociacaoDaSemanaAnterior(),
+            service.obterNegociacaoDaSemanaRetrasada()])
+        .then(negociacoes => {
+            console.log(negociacoes);
+
+        })
+        .catch()
+
+        /*
         service.obterNegociacaoDaSemana()         
             .then(negociacoes => {
                     negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
@@ -66,46 +78,9 @@ class NegociacaoController {
                     negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
                     this._mensagem.texto = 'Negociações importadas com sucesso.';
             }).catch(erro => this._mensagem.texto = erro);
-    
-        
-        /*
-        service.obterNegociacaoDaSemana((erro, negociacoes)=>{
-
-            if(erro)
-            {
-                this._mensagem.texto = erro;
-                return;
-            }
-
-            negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            //this._mensagem.texto = 'Negociações importadas com sucesso.';
-
-            service.obterNegociacaoDaSemanaAnterior((erro, negociacoes)=>{
-    
-                if(erro)
-                {
-                    this._mensagem.texto = erro;
-                    return;
-                }
-    
-                negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-                //this._mensagem.texto = 'Negociações importadas com sucesso.';
-    
-                service.obterNegociacaoDaSemanaRetrasada((erro, negociacoes)=>{
-        
-                    if(erro)
-                    {
-                        this._mensagem.texto = erro;
-                        return;
-                    }
-        
-                    negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-                    this._mensagem.texto = 'Negociações importadas com sucesso.';
-        
-                });
-            });
-        });
         */
+        
+        
     }
 
     /**
