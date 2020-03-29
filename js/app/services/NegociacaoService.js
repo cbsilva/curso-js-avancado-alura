@@ -1,26 +1,26 @@
 class NegociacaoService{
+    /**
+     * A convenção é que cada callback receba sempre o erro no primeiro parâmetro. 
+     * Na função callback, basta então verificar esse parâmetro para saber se ocorreu um erro ou não!
+     * --------------------------------------
+     * Exemplo:
+    * fs = require('fs');
+      fs.readFile('./arquivo.txt', function(erro, dados) {
+        if(erro) {
+            console.log('Um erro ocorreu');
+            return;
+        }
+        console.log(dados);
+      });
+     */
     obterNegociacaoDaSemana(callback){
-
-        /**
-         * A convenção é que cada callback receba sempre o erro no primeiro parâmetro. 
-         * Na função callback, basta então verificar esse parâmetro para saber se ocorreu um erro ou não!
-         * --------------------------------------
-         * Exemplo:
-        * fs = require('fs');
-          fs.readFile('./arquivo.txt', function(erro, dados) {
-            if(erro) {
-                console.log('Um erro ocorreu');
-                return;
-            }
-            console.log(dados);
-          });
-         */
 
         let xhr = new XMLHttpRequest ();
 
-        /* Configuracoes
-        caso a url fosse externa era preciso informar
-        o caminho completo e não apenas negociacoes/semana
+        /**
+         * Configuracoes
+         * caso a url fosse externa era preciso informar
+         * o caminho completo e não apenas negociacoes/semana
          */
         xhr.open('GET', 'negociacoes/semana');
 
@@ -53,4 +53,59 @@ class NegociacaoService{
         /*executa */
         xhr.send();
     }
+
+    obterNegociacaoDaSemanaAnterior(callback){
+
+        let xhr = new XMLHttpRequest ();
+
+        xhr.open('GET', 'negociacoes/anterior');     
+
+        xhr.onreadystatechange = () => {
+
+            if (xhr.readyState == 4){
+
+                if (xhr.status == 200) {
+
+                    callback(null, JSON.parse(xhr.responseText)
+                                   .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
+
+                } else {
+                    console.log(xhr.responseText);
+                    callback('Não foi possivel obter as negociações do servidor.');
+                }
+            }
+
+        }        
+        xhr.send();
+    }
+
+    obterNegociacaoDaSemanaRetrasada(callback){
+
+        let xhr = new XMLHttpRequest ();
+
+        xhr.open('GET', 'negociacoes/retrasada');     
+
+        xhr.onreadystatechange = () => {
+
+            if (xhr.readyState == 4){
+
+                if (xhr.status == 200) {
+
+                    callback(null, JSON.parse(xhr.responseText)
+                                   .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
+
+                } else {
+                    console.log(xhr.responseText);
+                    callback('Não foi possivel obter as negociações do servidor.');
+                }
+            }
+
+        }        
+        xhr.send();
+    }
+
+
+
+
+
 }
