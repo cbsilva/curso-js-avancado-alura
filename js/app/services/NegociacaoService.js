@@ -1,107 +1,88 @@
 class NegociacaoService{
-    /**
-     * A convenção é que cada callback receba sempre o erro no primeiro parâmetro. 
-     * Na função callback, basta então verificar esse parâmetro para saber se ocorreu um erro ou não!
-     * --------------------------------------
-     * Exemplo:
-    * fs = require('fs');
-      fs.readFile('./arquivo.txt', function(erro, dados) {
-        if(erro) {
-            console.log('Um erro ocorreu');
-            return;
-        }
-        console.log(dados);
-      });
-     */
-    obterNegociacaoDaSemana(callback){
+    
+    obterNegociacaoDaSemana(){
 
-        let xhr = new XMLHttpRequest ();
+        return new Promise((resolve, reject) => {
 
-        /**
-         * Configuracoes
-         * caso a url fosse externa era preciso informar
-         * o caminho completo e não apenas negociacoes/semana
-         */
-        xhr.open('GET', 'negociacoes/semana');
-
-        /* 
-        Estados esperados durante uma requisicao AJAX
-            0: requisição ainda não iniciada
-            1: conexão com o servidor estabelecida
-            2: requisição recebida
-            3: processando requisição
-            4: requisição está concluída e a resposta está pronta
-        */
-
-        xhr.onreadystatechange = () => {
-
-            if (xhr.readyState == 4){
-
-                if (xhr.status == 200) {
-
-                    callback(null, JSON.parse(xhr.responseText)
-                                   .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
-
-                } else {
-                    console.log(xhr.responseText);
-                    callback('Não foi possivel obter as negociações do servidor.');
-                }
-            }
-
-        }
-
-        /*executa */
-        xhr.send();
+            let xhr = new XMLHttpRequest ();
+            xhr.open('GET', 'negociacoes/semana');       
+    
+            xhr.onreadystatechange = () => {
+    
+                if (xhr.readyState == 4){
+    
+                    if (xhr.status == 200) {
+    
+                        resolve(JSON.parse(xhr.responseText)
+                                    .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
+    
+                    } else {
+                        console.log(xhr.responseText);
+                        reject('Não foi possivel obter as negociações do servidorda semana.');
+                    }
+                }    
+            }    
+            /*executa */
+            xhr.send();
+        });
     }
 
-    obterNegociacaoDaSemanaAnterior(callback){
+    obterNegociacaoDaSemanaAnterior(){
 
-        let xhr = new XMLHttpRequest ();
+        return new Promise((resolve, reject) => {
 
-        xhr.open('GET', 'negociacoes/anterior');     
-
-        xhr.onreadystatechange = () => {
-
-            if (xhr.readyState == 4){
-
-                if (xhr.status == 200) {
-
-                    callback(null, JSON.parse(xhr.responseText)
-                                   .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
-
-                } else {
-                    console.log(xhr.responseText);
-                    callback('Não foi possivel obter as negociações do servidor.');
+            let xhr = new XMLHttpRequest ();
+    
+            xhr.open('GET', 'negociacoes/anterior');     
+    
+            xhr.onreadystatechange = () => {
+    
+                if (xhr.readyState == 4){
+    
+                    if (xhr.status == 200) {
+    
+                        resolve(JSON.parse(xhr.responseText)
+                                       .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
+    
+                    } else {
+                        console.log(xhr.responseText);
+                        reject('Não foi possivel obter as negociações do servidor da semana anterior.');
+                    }
                 }
-            }
+    
+            }        
+            xhr.send();
+        });
 
-        }        
-        xhr.send();
     }
 
-    obterNegociacaoDaSemanaRetrasada(callback){
+    obterNegociacaoDaSemanaRetrasada(){
 
-        let xhr = new XMLHttpRequest ();
+        return new Promise((resolve, reject) =>{
 
-        xhr.open('GET', 'negociacoes/retrasada');     
-
-        xhr.onreadystatechange = () => {
-
-            if (xhr.readyState == 4){
-
-                if (xhr.status == 200) {
-
-                    callback(null, JSON.parse(xhr.responseText)
-                                   .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
-
-                } else {
-                    console.log(xhr.responseText);
-                    callback('Não foi possivel obter as negociações do servidor.');
+            let xhr = new XMLHttpRequest ();
+    
+            xhr.open('GET', 'negociacoes/retrasada');     
+    
+            xhr.onreadystatechange = () => {
+    
+                if (xhr.readyState == 4){
+    
+                    if (xhr.status == 200) {
+    
+                        resolve(JSON.parse(xhr.responseText)
+                                       .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
+    
+                    } else {
+                        console.log(xhr.responseText);
+                        reject('Não foi possivel obter as negociações do servidor da semana retrasada.');
+                    }
                 }
-            }
+    
+            }        
+            xhr.send();
+        });
 
-        }        
-        xhr.send();
     }
 
 

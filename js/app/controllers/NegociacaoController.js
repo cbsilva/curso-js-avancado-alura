@@ -47,8 +47,37 @@ class NegociacaoController {
 
     importacoNegociacoes(){
         
+        let promise;
+
         let service = new NegociacaoService();
 
+        promise = service.obterNegociacaoDaSemana();
+        promise 
+            .then(negociacoes => {
+                    negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+                    this._mensagem.texto = 'Negociações importadas com sucesso.';
+            }).catch(erro => this._mensagem.texto = erro);
+
+        promise = service.obterNegociacaoDaSemanaAnterior();
+        promise
+            .then(negociacoes => {
+                    negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+                    this._mensagem.texto = 'Negociações importadas com sucesso.';
+            }).catch(erro => this._mensagem.texto = erro);
+
+        promise = service.obterNegociacaoDaSemanaRetrasada();
+        promise
+            .then(negociacoes => {
+                    negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+                    this._mensagem.texto = 'Negociações importadas com sucesso.';
+            }).catch(erro => this._mensagem.texto = erro);
+
+
+
+
+    
+        
+        /*
         service.obterNegociacaoDaSemana((erro, negociacoes)=>{
 
             if(erro)
@@ -85,6 +114,7 @@ class NegociacaoController {
                 });
             });
         });
+        */
     }
 
     /**
