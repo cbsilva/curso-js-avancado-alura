@@ -22,7 +22,7 @@ class NegociacaoService{
         caso a url fosse externa era preciso informar
         o caminho completo e não apenas negociacoes/semana
          */
-        xhr.open('GET', 'negociacoes/semanax');
+        xhr.open('GET', 'negociacoes/semana');
 
         /* 
         Estados esperados durante uma requisicao AJAX
