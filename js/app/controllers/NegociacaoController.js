@@ -50,20 +50,21 @@ class NegociacaoController {
         let service = new NegociacaoService();
 
         Promise
-        .all([
-            service.obterNegociacaoDaSemana(),
-            service.obterNegociacaoDaSemanaAnterior(),
-            service.obterNegociacaoDaSemanaRetrasada()])
-        .then(negociacoes => {
-            negociacoes
-                .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
-                .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            this._mensagem.texto = 'Negociações importadas com sucesso.';
+            .all([
+                service.obterNegociacaoDaSemana(),
+                service.obterNegociacaoDaSemanaAnterior(),
+                service.obterNegociacaoDaSemanaRetrasada()])
+            .then(negociacoes => {
+                negociacoes
+                    .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
+                    .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = 'Negociações importadas com sucesso.';
             
         })
-        .catch(erro=> this._mensagem.texto = erro);            
+        .catch(erro => this._mensagem.texto = erro);            
     }
 
+    
     /**
      * Método privado para criar negociacao
      */
