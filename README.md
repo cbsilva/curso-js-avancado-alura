@@ -1,6 +1,10 @@
-# curso-js-avancado-alura
-Projeto do Curso JavaScript avançado.
+# Curso Java Script
 
-Este curso engloba os módulos I, II e III
+Os fontes contidos neste repositório fazem referencia ao conteúdo estudado no curso de #JAVA SCRITPT AVANÇADO.
+
+Foram concluídas as aulas referente aos módulos I e II.
+
+Os fontes referente ao módulo III serão publicados posteiormente.
+
 
 
