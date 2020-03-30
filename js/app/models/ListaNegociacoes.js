@@ -17,6 +17,15 @@ class ListaNegociacoes {
         
        
     }
+
+    /**
+     * Ordena a negociacao conforme coluna
+     * selecionada
+     * @param {string} criterio 
+     */
+    ordena(criterio){
+        this._negociacoes.sort(criterio);
+    }
     
     /**
      * Metodos retorna lista de negociacoes

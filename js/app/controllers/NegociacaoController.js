@@ -11,7 +11,7 @@ class NegociacaoController {
         this._listaNegociacoes = new Bind(
             new ListaNegociacoes(),
             new NegociacoesView($('#negociacoesView')),
-            'adiciona','esvazia' 
+            'adiciona','esvazia','ordena'
         );        
 
         this._mensagem = new Bind(
@@ -88,5 +88,16 @@ class NegociacaoController {
         this._inputValor.value      = 0.0;
 
         this._inputData.focus();       
-    }    
+    } 
+
+    /**
+     * Ordena a negociacao conforme coluna
+     * selecionada
+     * @param {string} coluna 
+     */
+    
+    ordena(coluna){
+        this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+
+    }
 }
