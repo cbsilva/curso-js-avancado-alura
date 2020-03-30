@@ -7,11 +7,14 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
+        //Quando a página for carregada, não tem critério. 
+        //Só passa a ter quando ele começa a clicar nas colunas
+        this._ordemAtual = '';
 
         this._listaNegociacoes = new Bind(
             new ListaNegociacoes(),
             new NegociacoesView($('#negociacoesView')),
-            'adiciona','esvazia','ordena'
+            'adiciona','esvazia','ordena', 'inverteOrdem'
         );        
 
         this._mensagem = new Bind(
@@ -97,7 +100,17 @@ class NegociacaoController {
      */
     
     ordena(coluna){
-        this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+        if (this._ordemAtual = coluna) {
+            this._listaNegociacoes.inverteOrdem();
+        } else  {
+            this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+        }
 
+        this._ordemAtual = coluna;
+
+    }
+
+    inverteOrdem() {
+        this._listaNegociacoes.inverteOrdem();
     }
 }
