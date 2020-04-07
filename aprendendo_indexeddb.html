@@ -7,14 +7,19 @@
 </head>
 <body>
     <script>
-        var openRequest = window.indexedDB.open('aluraframe', 1);
+        var connection;
+
+        var openRequest = window.indexedDB.open('aluraframe', 2);
 
         openRequest.onupgradeneeded = e => {
             console.log('Criando ou atualizando uma versão do banco!');
+            var myConnection = e.target.result;
+            myConnection.createObjectStore('negociacoes');
         }
 
         openRequest.onsuccess = e =>{
             console.log('Banco carregado com sucesso!');
+            connection = e.target.result;
         }
 
         openRequest.onerror = e => {
