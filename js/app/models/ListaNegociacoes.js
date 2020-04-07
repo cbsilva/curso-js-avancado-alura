@@ -17,6 +17,19 @@ class ListaNegociacoes {
         
        
     }
+
+    /**
+     * Ordena a negociacao conforme coluna
+     * selecionada
+     * @param {string} criterio 
+     */
+    ordena(criterio){
+        this._negociacoes.sort(criterio);
+    }
+
+    inverteOrdem(){
+        this._negociacoes.reverse();
+    }
     
     /**
      * Metodos retorna lista de negociacoes
