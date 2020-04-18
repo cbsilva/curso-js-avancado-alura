@@ -8,11 +8,14 @@
 
     /**
      * declaracao de variaveis locais
+     * Qdo utilizado const no ES6 não permite reatribuir valor
      */
-    var stores = ['negociacoes'];
-    var version = 6;
-    var dbName = 'aluraframe'
+    const stores = ['negociacoes'];
+    const version = 6;
+    const dbName = 'aluraframe'
+
     var connection = null;
+    var close = null;
 
      //transforma classe em modulo
      return class ConnectionFactory {
@@ -34,7 +37,17 @@
                  
                  openRequest.onsuccess = e => {
      
-                     if (!connection) connection = e.target.result;
+                    if (!connection) {
+                        connection = e.target.result;
+
+                        close = connection.close.bind(connection);
+
+                        //monkey patch
+                        connection.close = function(){
+                            throw new Error('Você não pode fechar diretamente a conexão');
+                        }
+                    } 
+                         
                      resolve(connection);
                      
                  }
@@ -57,6 +70,15 @@
                  connection.createObjectStore(store, {autoIncrement:true});                    
              });
      
+         }
+
+         static closeConnection(){
+
+            if (connection) {
+                close();
+                connection = null;
+            }
+
          }
      
      
