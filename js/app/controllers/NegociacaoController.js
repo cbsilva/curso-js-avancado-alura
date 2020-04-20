@@ -19,8 +19,7 @@ class NegociacaoController {
 
         this._mensagem = new Bind(
             new Mensagem(),
-            new MensagemView($('#mensagemView')),
-            'texto'
+            new MensagemView($('#mensagemView')),'texto'
         );   
         
         ConnectionFactory
@@ -79,35 +78,15 @@ class NegociacaoController {
             });      
     }
 
-    importacoNegociacoes(){        
-
-        ConnectionFactory
-            .getConnection()
-            .then(conexao => {
-
-                let service = new NegociacaoService();
-                
-                Promise
-                    .all([
-                        service.obterNegociacaoDaSemana(),
-                        service.obterNegociacaoDaSemanaAnterior(),
-                        service.obterNegociacaoDaSemanaRetrasada()])
-                    .then(negociacoes => {
-                        negociacoes
-                            .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
-                            .forEach(negociacao => {
-                                new NegociacaoDao(conexao)
-                                    .adiciona(negociacao)
-                                    .then(() =>{
-                                        this._listaNegociacoes.adiciona(negociacao);
-                                        this._mensagem.texto = 'Negociações importadas com sucesso.';
-                                    })
-
-                            });                       
-            
-                    });                   
-
-            }).catch(erro => this._mensagem.texto = erro);                      
+    importacoNegociacoes(){    
+        
+        let service = new NegociacaoService();
+        service
+            .obterNegociacoes()        
+            .then(negociacoes => negociacoes.forEach(negociacao => {
+                this._listaNegociacoes.adiciona(negociacao);
+                this._mensagem.texto = 'Negociações importadas com sucesso.';
+            })).catch(erro => this._mensagem.texto = erro);                   
     }
 
     
