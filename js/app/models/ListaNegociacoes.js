@@ -1,9 +1,15 @@
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 // eslint-disable-next-line no-unused-vars
-class ListaNegociacoes {
+var ListaNegociacoes = function () {
+    function ListaNegociacoes() {
+        _classCallCheck(this, ListaNegociacoes);
 
-    constructor() {
-
-        this._negociacoes = [];              
+        this._negociacoes = [];
     }
 
     /**
@@ -11,40 +17,51 @@ class ListaNegociacoes {
      * @param {Array} negociacao 
      */
 
-    adiciona(negociacao){
+    _createClass(ListaNegociacoes, [{
+        key: "adiciona",
+        value: function adiciona(negociacao) {
 
-        this._negociacoes.push(negociacao);
-        
-       
-    }
+            this._negociacoes.push(negociacao);
+        }
 
-    /**
-     * Ordena a negociacao conforme coluna
-     * selecionada
-     * @param {string} criterio 
-     */
-    ordena(criterio){
-        this._negociacoes.sort(criterio);
-    }
+        /**
+         * Ordena a negociacao conforme coluna
+         * selecionada
+         * @param {string} criterio 
+         */
 
-    inverteOrdem(){
-        this._negociacoes.reverse();
-    }
-    
-    /**
-     * Metodos retorna lista de negociacoes
-     */
-    get negociacoes(){
-        
-        /* incluido array vazio antes do concat, para
-        * blindar o metodo e não deixar o usuário incluir 
-        * sujeira
-        */
-       return [].concat(this._negociacoes);
-    }
+    }, {
+        key: "ordena",
+        value: function ordena(criterio) {
+            this._negociacoes.sort(criterio);
+        }
+    }, {
+        key: "inverteOrdem",
+        value: function inverteOrdem() {
+            this._negociacoes.reverse();
+        }
 
-    esvazia(){
-        this._negociacoes = [];
-               
-    }
-}
+        /**
+         * Metodos retorna lista de negociacoes
+         */
+
+    }, {
+        key: "esvazia",
+        value: function esvazia() {
+            this._negociacoes = [];
+        }
+    }, {
+        key: "negociacoes",
+        get: function get() {
+
+            /* incluido array vazio antes do concat, para
+            * blindar o metodo e não deixar o usuário incluir 
+            * sujeira
+            */
+            return [].concat(this._negociacoes);
+        }
+    }]);
+
+    return ListaNegociacoes;
+}();
+//# sourceMappingURL=ListaNegociacoes.js.map
