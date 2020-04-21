@@ -1,7 +1,7 @@
 /**
  * Classe de view genérica 
  */
-class View {
+export class View {
 
     constructor(elemento) {
         

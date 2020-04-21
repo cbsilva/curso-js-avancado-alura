@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-class ListaNegociacoes {
+export class ListaNegociacoes {
 
     constructor() {
 
