@@ -1,8 +1,3 @@
-/**
- * comando para chamar classe no browser
- * apagar depois dos testes
- * ConnectionFactory.getConnection().then(connection => console.log(connection));
- */
 
  var ConnectionFactory = (function () {
 

@@ -1,32 +1,32 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 class NegociacaoController {
 
     constructor (){
+
         let $ = document.querySelector.bind(document);
+
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
-        //Quando a página for carregada, não tem critério. 
-        //Só passa a ter quando ele começa a clicar nas colunas
-        this._ordemAtual = '';
-
+        
         this._listaNegociacoes = new Bind(
             new ListaNegociacoes(),
             new NegociacoesView($('#negociacoesView')),
             'adiciona','esvazia','ordena', 'inverteOrdem'
         );        
-
+            
         this._mensagem = new Bind(
             new Mensagem(),
             new MensagemView($('#mensagemView')),'texto'
         );   
-        
+            
+        //Quando a página for carregada, não tem critério. 
+        //Só passa a ter quando ele começa a clicar nas colunas
+        this._ordemAtual = '';
         ConnectionFactory
             .getConnection()
             .then(conexao => new NegociacaoDao(conexao))
             .then(dao => dao.listaTodos())
-            .then(negociacaoes => negociacaoes.forEach(negociacao => 
+            .then(negociacoes => negociacoes.forEach(negociacao => 
                 this._listaNegociacoes.adiciona(negociacao)))
             .catch(erro => {
                 console.log(erro);
