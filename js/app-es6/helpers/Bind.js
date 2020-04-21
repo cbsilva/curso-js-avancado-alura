@@ -1,4 +1,4 @@
-class Bind {
+export class Bind {
     
     /**
      * Para se aplicar o rest operator o parametro deve

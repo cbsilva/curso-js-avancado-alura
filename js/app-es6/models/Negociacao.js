@@ -1,4 +1,4 @@
-class Negociacao {
+export class Negociacao {
 
     /**
      * Por convencao todos os metodos privates 
