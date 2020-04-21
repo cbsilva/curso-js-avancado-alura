@@ -1,3 +1,4 @@
+import {ProxyFactory} from '../services/ProxyFactory';
 export class Bind {
     
     /**
